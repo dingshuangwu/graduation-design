@@ -37,7 +37,7 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
-  path: logs/graduation-design
+  path: core/logs/graduation-design
   level:
     root: info
 
