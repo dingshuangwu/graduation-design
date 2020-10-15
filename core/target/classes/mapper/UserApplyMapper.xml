@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dingshuangwu.graduation.graduationo2o.mapper.UserApplyMapper">
+    <update id="setRealNameAuthentication">
+        update
+        ${realNameAuthenticationTable} t
+        left join ${userTableName} t1
+        on t.id = t1.id
+        left join ${jurisdictionTableName} t2
+        on t.id = t2.id
+        set t.identity_card_front = #{map.identityCardFront},
+        t.identity_card_reverse = #{map.identityCardReverse},
+        t.current_photo = #{map.currentPhoto},
+        t.apply_date = #{map.applyDate},
+        t.flag = #{map.flag},
+        t1.real_name_authentication = #{map.flag},
+        t2.real_name_authentication = #{jurisdictionNO}
+        where t.id = #{map.id}
+    </update>
+    <update id="setApplyForManagement">
+        update
+        ${applyForManagementTable} t
+        left join ${jurisdictionTableName} t1
+        on t.id = t1.id
+        set t.context = #{map.context},
+        t.contact_way = #{map.contactWay},
+        t.apply_date = #{map.applyDate},
+        t.flag = #{map.flag},
+        t1.apply_for_management = #{jurisdictionNO}
+        where t.id = #{map.id}
+    </update>
+    <select id="getRealNameAuthentication" resultType="dingshuangwu.graduation.graduationo2o.pojo.RealNameAuthenticationVO">
+        select
+        t.identity_card_front as `identityCardFront`,
+        t.identity_card_reverse as `identityCardReverse`,
+        t.current_photo as `currentPhoto`
+        from
+        ${tableName} t
+        where t.id = #{id}
+    </select>
+</mapper>

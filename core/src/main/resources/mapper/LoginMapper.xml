@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dingshuangwu.graduation.graduationo2o.mapper.LoginMapper">
+
+
+    <!--密码验证-->
+    <select id="login" resultType="dingshuangwu.graduation.graduationo2o.pojo.UserVO">
+        select
+           t.id as `id`,
+           t.name as `name`
+        from
+           ${tableName} t
+        where
+            t.name = #{name}
+            and t.password = #{password}
+            and t.flag='normal'
+    </select>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dingshuangwu.graduation.graduationo2o.mapper.SignInMapper">
+
+    <insert id="signIn" useGeneratedKeys="true" keyProperty="map.id" keyColumn="id">
+    insert into
+    ${tableName} (name,password,real_name_authentication,create_date,flag)
+    values(#{map.name},#{map.password},#{map.realNameAuthentication},#{map.createDate},#{map.flag})
+    </insert>
+
+    <insert id="setJurisdiction">
+    insert into
+    ${tableName}
+    values(#{map.id},#{map.name},#{map.management},#{map.publish},#{map.apply},#{map.myPublish},#{map.myApply},#{map.realNameAuthentication},#{map.applyForManagement},#{map.login})
+    </insert>
+
+    <insert id="setUserInfo">
+    insert into
+    ${tableName}
+    values(#{map.id},#{map.name},#{map.nation},#{map.sex},#{map.birthday},#{map.educationBackground},#{map.telephone},#{map.email},
+    #{map.imageUrl},#{map.selfIntroduction}, #{map.educationExperienceFirstStartDate},#{map.educationExperienceFirstEndDate},
+    #{map.educationExperienceFirstSchool},#{map.educationExperienceSecondStartDate},#{map.educationExperienceSecondEndDate},
+    #{map.educationExperienceSecondSchool},#{map.educationExperienceThirdStartDate},#{map.educationExperienceThirdEndDate},
+    #{map.educationExperienceThirdSchool},#{map.selfSignature},#{map.lastModifyDate})
+    </insert>
+
+    <insert id="setMyResume">
+    insert into
+    ${tableName}
+    values(#{map.id},#{map.name},#{map.sex},#{map.birthday},#{map.workTime},#{map.educationBackground},#{map.area},#{map.telephone},
+    #{map.email},#{map.expertise},#{map.expectedWorkFirstJob},#{map.expectedWorkFirstSalary},#{map.expectedWorkFirstArea},
+    #{map.expectedWorkSecondJob},#{map.expectedWorkSecondSalary},#{map.expectedWorkSecondArea},#{map.expectedWorkThirdJob},
+    #{map.expectedWorkThirdSalary},#{map.expectedWorkThirdArea},#{map.workExperience},#{map.lastModifyDate})
+    </insert>
+
+    <insert id="setRealNameAuthentication">
+    insert into
+    ${tableName}
+    values(#{map.id},#{map.name},#{map.identityCardFront},#{map.identityCardReverse},#{map.currentPhoto},#{map.applyDate},#{map.flag})
+    </insert>
+    <insert id="setApplyForManagement">
+    insert into
+    ${tableName}
+    values(#{map.id},#{map.name},#{map.context},#{map.contactWay},#{map.applyDate},#{map.flag})
+    </insert>
+    <update id="updatePasswordById">
+        update
+        ${tableName} t
+        set t.password=#{password}
+        where t.id=#{id}
+        and t.flag='normal'
+    </update>
+</mapper>

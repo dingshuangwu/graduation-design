@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <include resource="org/springframework/boot/logging/logback/default.xml" />
+    
+    <springProperty scope="context" name="AppName" source="spring.application.name"></springProperty>
+    <springProperty scope="context" name="LoggingPath" source="logging.path"></springProperty>
+    <springProperty scope="context" name="LoggingLevel" source="logging.level.root"></springProperty>
+    <property name="SysDate" value="%d{yyyy/MM/dd HH:mm:ss.SSS}" />
+     
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <!-- 控制台 appender -->  
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${SysDate} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- 错误日志 appender  -->  
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LoggingPath}/${AppName}-system-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LoggingPath}/${AppName}-system-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 180天 -->  
+            <maxHistory>180</maxHistory>  
+        </rollingPolicy>  
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>${SysDate} [%thread] %-5level %logger{36} - %msg%n</pattern>  
+        </encoder>  
+        <!-- 只打印错误日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">  
+            <level>ERROR</level>  
+            <onMatch>ACCEPT</onMatch>  
+            <onMismatch>DENY</onMismatch>  
+        </filter>
+    </appender>
+    
+    <!-- 访问日志 appender  --> 
+    <appender name="access" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LoggingPath}/${AppName}-system-access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LoggingPath}/${AppName}-system-access.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 180天 -->  
+            <maxHistory>180</maxHistory>  
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>${SysDate} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LoggingPath}/${AppName}-system.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LoggingPath}/${AppName}-system.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>${SysDate} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- project -->
+    <logger name="com.futuredata.cloud"/>
+    <!--log4jdbc -->
+    <logger name="jdbc.sqltiming"/>
+    <logger name="com.mybatis"/>
+    <logger name="com.mybatis.common.jdbc.SimpleDataSource"/>
+    <logger name="com.mybatis.common.jdbc.ScriptRunner"/>
+    <logger name="com.mybatis.sqlmap.engine.impl.SqlMapClientDelegate"/>
+    <logger name="java.sql.Connection"/>
+    <logger name="java.sql.Statement"/>
+    <logger name="java.sql.PreparedStatement"/>
+    <logger name="java.sql.ResultSet"/>
+    
+    <!-- addtivity:是否向上级loger传递打印信息。默认是true -->
+<!--    <logger name="com.futuredata.cloud.zuul.filter.TrackLogFilter" level="info" addtivity="false">-->
+<!--        <appender-ref ref="access" />-->
+<!--    </logger>-->
+         
+    <!-- TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF -->
+    <root level="${LoggingLevel}">
+        <appender-ref ref="console" />
+        <appender-ref ref="error" />
+        <appender-ref ref="debug" />
+    </root>
+</configuration>
+

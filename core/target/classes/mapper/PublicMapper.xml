@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dingshuangwu.graduation.graduationo2o.mapper.PublicMapper">
+    <select id="getUserByName" resultType="dingshuangwu.graduation.graduationo2o.pojo.UserVO">
+    select
+    t.name as `name`,
+    t.real_name_authentication as `realNameAuthentication`,
+    t.create_date as `createDate`
+    from
+    ${tableName} t
+    where t.name=#{name}
+    and t.flag='normal'
+    </select>
+    <select id="getIdByName" resultType="string">
+    select
+    t.id
+    from
+    ${tableName} t
+    where t.name=#{name}
+    and t.flag='normal'
+    </select>
+    <select id="getNameById" resultType="string">
+    select
+    t.name
+    from
+    ${tableName} t
+    where t.id=#{id}
+    and t.flag='normal'
+    </select>
+    <select id="getIsRealNameAuthenticationById" resultType="string">
+    select
+    t.real_name_authentication
+    from
+    ${tableName} t
+    where t.id = #{id}
+    and t.flag='normal'
+    </select>
+    <select id="getApplyForManagementStateById" resultType="string">
+    select
+    t.flag
+    from
+    ${tableName} t
+    where t.id = #{id}
+    </select>
+    <select id="getIsManagement" resultType="boolean">
+    select
+    t.management
+    from
+    ${tableName} t
+    where t.id = #{id}
+    </select>
+    <select id="getImageUrlById" resultType="string">
+    select
+    t.image_url
+    from
+    ${tableName} t
+    where t.id=#{id}
+    </select>
+    <select id="getJurisdictionByName" resultType="dingshuangwu.graduation.graduationo2o.pojo.JurisdictionVO">
+    select
+    t.name as `name`,
+    t.management as `management`,
+    t.publish as `publish`,
+    t.apply as `apply`,
+    t.my_publish as `myPublish`,
+    t.my_apply as `myApply`,
+    t.real_name_authentication as `realNameAuthentication`,
+    t.apply_for_management as `applyForManagement`,
+    t.login as `login`
+    from
+    ${tableName} t
+    where t.name = #{name}
+    </select>
+    <update id="setFlagById">
+        update
+        ${tableName} t
+        set t.flag=#{flag}
+        where t.id=#{id}
+    </update>
+    <select id="getCreateDateById" resultType="string">
+    select
+    t.create_date
+    from
+    ${tableName} t
+    where
+    t.id=#{id}
+</select>
+    <select id="getAuthorIdById" resultType="string">
+        select
+        t.author_id
+        from
+        ${tableName} t
+        where t.id=#{id}
+        and t.flag='normal'
+    </select>
+
+    <select id="getPasswordById" resultType="string">
+        select
+        t.password
+        from
+        ${tableName} t
+        where t.id=#{id}
+        and t.flag='normal'
+    </select>
+
+    <select id="getUserListNoManagement" resultType="map">
+        select
+        t.id as `id`,
+        t.name as `name`
+        from
+        ${tableName} t
+        left join
+        ${jurisdictionTableName} t1
+        on t.id = t1.id
+        where t1.management = #{jurisdictionNO}
+        <if test="name!=null">
+        and t.name like "%"#{name}"%"
+        </if>
+        order by
+        t.id
+        asc
+    </select>
+    <select id="getUserListHaveManagement" resultType="map">
+        select
+        t.id as `id`,
+        t.name as `name`
+        from
+        ${tableName} t
+        <if test="name!=null">
+            where t.name like "%"#{name}"%"
+        </if>
+        order by
+        t.id
+        asc
+    </select>
+    <select id="getRoot" resultType="dingshuangwu.graduation.graduationo2o.pojo.root.RootVO">
+        select
+        *
+        from
+        ${tableName} t
+        where t.id = #{id}
+        and t.name = #{name}
+    </select>
+</mapper>

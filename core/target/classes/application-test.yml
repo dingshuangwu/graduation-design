@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    name: graduation
+    url: jdbc:mysql://127.0.0.1:3306/db_graduation?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 980429dsw
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+server:
+  port: 8080
+
+
+

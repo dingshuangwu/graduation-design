@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: graduation-design
+  profiles:
+    active: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  servlet:
+    multipart:
+      max-file-size: 10Mb
+      max-request-size: 20Mb
+
+
+
+info:
+  app:
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
+    spring-boot-version: "@project.version@"
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  config: classpath:logback-spring.xml
+  path: logs/graduation-design
+  level:
+    root: info
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    name: graduation
+    url: jdbc:mysql://127.0.0.1:3306/db_graduation?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 980429dsw
+  aop:
+    proxy-target-class: true #AOP支持
+
+server:
+  port: 8200
+
+#打印执行的sql语句
+logging:
+  level:
+    dingshuangwu.graduation.graduationo2o.mapper: debug
+
+
