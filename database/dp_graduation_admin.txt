@@ -1,0 +1,5 @@
+CREATE TABLE `dp_graduation_admin` (
+  `name` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

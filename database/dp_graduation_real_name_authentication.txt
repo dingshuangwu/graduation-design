@@ -1,0 +1,12 @@
+CREATE TABLE `dp_graduation_real_name_authentication` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `identity_card_front` mediumtext,
+  `identity_card_reverse` mediumtext,
+  `current_photo` mediumtext,
+  `apply_date` varchar(20) NOT NULL,
+  `flag` varchar(10) DEFAULT 'default',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

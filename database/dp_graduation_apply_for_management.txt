@@ -1,0 +1,11 @@
+CREATE TABLE `dp_graduation_apply_for_management` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `context` mediumtext,
+  `contact_way` varchar(20) DEFAULT NULL,
+  `apply_date` varchar(20) NOT NULL,
+  `flag` varchar(10) DEFAULT 'default',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

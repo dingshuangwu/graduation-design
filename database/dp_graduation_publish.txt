@@ -1,0 +1,19 @@
+CREATE TABLE `dp_graduation_publish` (
+  `author_id` int(10) unsigned NOT NULL,
+  `author_name` varchar(30) NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `area_id` varchar(100) NOT NULL,
+  `area_name` varchar(100) NOT NULL,
+  `area_parent_id` varchar(100) NOT NULL,
+  `area_parent_name` varchar(100) NOT NULL,
+  `category_id` varchar(100) NOT NULL,
+  `category_name` varchar(100) NOT NULL,
+  `category_parent_id` varchar(100) NOT NULL,
+  `category_parent_name` varchar(100) NOT NULL,
+  `salary` varchar(100) NOT NULL,
+  `contact_way` varchar(100) NOT NULL,
+  `create_date` varchar(100) NOT NULL,
+  `flag` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

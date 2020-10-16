@@ -1,0 +1,11 @@
+CREATE TABLE `dp_graduation_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `real_name_authentication` varchar(20) NOT NULL,
+  `create_date` date NOT NULL,
+  `flag` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

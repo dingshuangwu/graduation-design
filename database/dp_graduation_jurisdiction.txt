@@ -1,0 +1,14 @@
+CREATE TABLE `dp_graduation_jurisdiction` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `management` tinyint(1) NOT NULL,
+  `publish` tinyint(1) NOT NULL,
+  `apply` tinyint(1) NOT NULL,
+  `my_publish` tinyint(1) NOT NULL,
+  `my_apply` tinyint(1) NOT NULL,
+  `real_name_authentication` tinyint(2) NOT NULL,
+  `apply_for_management` tinyint(2) NOT NULL,
+  `login` tinyint(1) NOT NULL,
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
